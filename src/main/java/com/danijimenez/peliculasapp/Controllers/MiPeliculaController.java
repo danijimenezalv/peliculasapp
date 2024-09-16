@@ -1,6 +1,5 @@
 package com.danijimenez.peliculasapp.Controllers;
 
-import com.danijimenez.peliculasapp.APIs.OpenMovieDatabaseAPI;
 import com.danijimenez.peliculasapp.Entities.Pelicula;
 import com.danijimenez.peliculasapp.Services.PeliculasServices;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,7 +32,9 @@ public class MiPeliculaController {
                 return "No se ha encontrando ninguna película con el título: " + peliculaNombre;
             }
             else {
-                if(sorted){lPeliculas.sort(Comparator.comparingInt(Pelicula::getAño).reversed());}
+                if(sorted){
+                    peliculasServices.ordenarPeliculasPorAño(lPeliculas);
+                }
 
                 StringBuilder res = new StringBuilder();
                 for (Pelicula p : lPeliculas){
