@@ -25,12 +25,19 @@ public class MiPeliculaController {
         private RestTemplate restTemplate = new RestTemplate();
 
         @GetMapping("/{peliculaNombre}")
-        public String buscarPeliculaPorNombre(@PathVariable String peliculaNombre) throws JsonProcessingException {
+        public List<Pelicula> buscarPeliculaPorNombre(@PathVariable String peliculaNombre) throws JsonProcessingException {
             String url = openMovieDatabaseAPI.obtenerConsultaPeliculaporNombre(peliculaNombre);
 
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
             List<Pelicula> lPeliculas = peliculasServices.convertirBusquedaPeliculaAPelicula(response);
+
+            return lPeliculas;
+        };
+
+        @GetMapping("/mostrar/{peliculaNombre}")
+        public String mostrarPeliculaPorNombre(@PathVariable String peliculaNombre) throws JsonProcessingException {
+            List<Pelicula> lPeliculas = this.buscarPeliculaPorNombre(peliculaNombre);
 
             StringBuilder res = new StringBuilder();
             for (Pelicula p : lPeliculas){
