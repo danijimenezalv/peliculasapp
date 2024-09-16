@@ -14,15 +14,14 @@ import org.springframework.web.client.RestTemplate;
 public class PeliculasController {
 
     @Autowired
-    private OpenMovieDatabaseAPI openMovieDatabaseAPI;
+    private OpenMovieDatabaseAPI movieAPI;
     private RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping("/{peliculaNombre}")
     public ResponseEntity<String> buscarPeliculaPorNombre(@PathVariable String peliculaNombre){
-        String url = openMovieDatabaseAPI.obtenerConsultaPeliculaporNombre(peliculaNombre);
 
+        String url = movieAPI.obtenerLlamadaHttpBuscarPeliculasPorNombre(peliculaNombre);
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-
         return response;
     };
 
