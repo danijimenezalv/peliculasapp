@@ -52,19 +52,11 @@ public class OpenMovieDatabaseAPI implements IMovieAPI {
     public List<Pelicula> convertirRespuestaListaPeliculas(ResponseEntity<String> response)
             throws JsonProcessingException {
 
-        // 1. Obtener el cuerpo del ResponseEntity como String
         String jsonString = response.getBody();
-
-        // 2. Crear un ObjectMapper para trabajar con el JSON
         ObjectMapper objectMapper = new ObjectMapper();
-
-        // 3. Leer el JSON String en un JsonNode
         JsonNode rootNode = objectMapper.readTree(jsonString);
-
-        // 4. Acceder al array de películas en el campo "Search"
         JsonNode peliculasArray = rootNode.get("Search");
 
-        // 5. Crear una lista para almacenar los objetos Pelicula
         List<Pelicula> peliculas = new ArrayList<>();
         if(peliculasArray == null || peliculasArray.isEmpty()){
             return peliculas;
