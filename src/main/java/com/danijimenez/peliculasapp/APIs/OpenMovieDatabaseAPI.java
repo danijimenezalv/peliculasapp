@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class OpenMovieDatabaseAPI implements IMovieAPI {
 
-    private static String urlBase = "http://www.omdbapi.com/";
+    private final static String urlBase = "http://www.omdbapi.com/";
     private static String apiKey = "c397cdb2";
     private final static String parametroBuscarPeliculasPorNombre = "s";
 
@@ -25,10 +25,6 @@ public class OpenMovieDatabaseAPI implements IMovieAPI {
         return urlBase;
     }
 
-    public static void seturlBase(String urlBase) {
-        OpenMovieDatabaseAPI.urlBase = urlBase;
-    }
-
     public static String getApiKey() {
         return apiKey;
     }
@@ -37,6 +33,9 @@ public class OpenMovieDatabaseAPI implements IMovieAPI {
         OpenMovieDatabaseAPI.apiKey = apiKey;
     }
 
+    public static String getParametroBuscarPeliculasPorNombre() {
+        return parametroBuscarPeliculasPorNombre;
+    }
 
     public String obtenerUrlConAPIkey(){
         return UriComponentsBuilder.fromHttpUrl(urlBase)
